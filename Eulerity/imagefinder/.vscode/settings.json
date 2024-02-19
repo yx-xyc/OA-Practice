@@ -1,0 +1,6 @@
+{
+    "java.help.firstView": "overview",
+    "maven.terminal.useJavaHome": true,
+    "spring-boot.ls.java.home": "",
+    "java.jdt.ls.java.home": ""
+}

@@ -1,0 +1,15 @@
+Please paste your list of test URLs below:
+https://signal.org/docs/specifications/doubleratchet/
+// Find 1 web pages and 22 images in total.
+https://www.apple.com/macbook-air/
+// Find 1 web pages and 18 images in total.
+https://cs.nyu.edu/home/undergrad/overview.html
+// Find 21 web pages and 2 images in total.
+https://www.sciencekids.co.nz/pictures/scientists.html
+// Find 2 web pages and 100 images in total.
+https://en.wikipedia.org/wiki/Recurrent_neural_network
+// Find 36 web pages and 45 images in total.
+https://en.wikipedia.org/wiki/Java
+// Find 14 web pages and 46 images in total.
+https://madmuseum.org/
+// Find 7 web pages and 53 images in total.
