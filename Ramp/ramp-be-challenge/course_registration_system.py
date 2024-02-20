@@ -55,7 +55,6 @@ def parser(input_args):
     else:
         print("Cannot recognize command")
     
-
 def test_level1():
     # Ensure creation of students first to prevent error during registration
     create_student("st001")
