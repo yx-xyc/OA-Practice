@@ -1,12 +1,6 @@
 from typing import Dict
-
-class Student:
-    def __init__(self, studentId: str):
-        self.studentId = studentId
-        self.courses = set()  # Stores course IDs
-    
-    def register_course(self, courseId: str):
-        self.courses.add(courseId)
+from course import Course
+from student import Student
 
 courses: Dict[str, Course] = {}
 students: Dict[str, Student] = {}
@@ -31,6 +25,16 @@ def register_for_course(studentId: str, courseId: str):
     else:
         print(f"Error registering {studentId} for {courseId}")
 
+def get_paired_students():
+    students_list = list(students.values())
+    paired_students = set()
+    for idx, student in enumerate(students_list):
+        for another_student in students_list[idx+1:]:
+            for course in student.courses:
+                if course in another_student.courses:
+                    paired_students.add((student.studentId, another_student.studentId))
+    return sorted(list(paired_students))
+
 def parser(input_args):
     command, *args = input_args
     if command == "CREATE_COURSE":
@@ -45,6 +49,9 @@ def parser(input_args):
             register_for_course(*args)  # Correct function name and unpack args
         else:
             print("REGISTER_FOR_COURSE command requires two arguments: studentId, courseId.")
+    elif command == "GET_PAIRD_STUDENTS":
+        paired_students = get_paired_students()
+        print(paired_students)
     else:
         print("Cannot recognize command")
     
@@ -53,7 +60,7 @@ def test_level1():
     # Ensure creation of students first to prevent error during registration
     create_student("st001")
     create_student("st002")
-
+    create_student("st003")
     queries = [
         ["CREATE_COURSE", "CSE220", "System Programming", "3"],
         ["CREATE_COURSE", "CSE221", "Data Structures", "3"],
@@ -62,13 +69,17 @@ def test_level1():
         ["CREATE_COURSE", "CSE300", "Introduction to Algorithms", "4"],
         ["REGISTER_FOR_COURSE", "st001", "CSE220"],
         ["REGISTER_FOR_COURSE", "st002", "CSE221"],
+        ["GET_PAIRD_STUDENTS"],
         ["REGISTER_FOR_COURSE", "st001", "CSE300"],
-        ["REGISTER_FOR_COURSE", "st003", "CSE330"],  # st003 not created, should cause an error message
+        ["REGISTER_FOR_COURSE", "st003", "CSE300"],  # st003 not created, should cause an error message
+        ["GET_PAIRD_STUDENTS"]
     ]
     
     for query in queries:
         parser(query)
 
-    print(courses)
-    print(students)
+    for student in students:
+        print(students[student])
+    for course in courses:
+        print(courses[course])
 test_level1()
