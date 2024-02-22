@@ -1,6 +1,9 @@
 public class StringPattern {
     public static void main(String[] args) {
+        System.out.println(calculateWays(1, 1));
         System.out.println(calculateWays(4, 1));
+        System.out.println(calculateWays(4, 2));
+
     }
     public static int calculateWays(int wordLen, int maxVowels) {
         int N = wordLen;
@@ -8,10 +11,9 @@ public class StringPattern {
         int i, j;
         long mod = 1000000007;
         long[][] dp = new long[N+1][K+1];
-        // dp[i][j] = number of strings of length i where last j characters of the string are vowels
         long sum = 1;
         for (i=1;i<=N;i++) {
-            dp[i][0] =  sum*21;
+            dp[i][0] = sum*21;
             dp[i][0] %= mod;
             sum = dp[i][0];
 
@@ -28,13 +30,6 @@ public class StringPattern {
                 sum %= mod;
             }
         }
-        // code to print the dp table
-        // for (long[] row : dp) {
-        //     for (long a : row) {
-        //         System.out.print(a+"\t");
-        //     }
-        //     System.out.println();
-        // }
         return (int)sum;
     }
 

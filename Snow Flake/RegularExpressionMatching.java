@@ -24,7 +24,7 @@ public class RegularExpressionMatching{
             // the first character matched and keep matching following text
                 // since the second character of pattern is '*', 
                 // we still need to check the first character of pattern with the text substring
-                // untile we get to condition 1, the first character of pattern no longer appear
+                // until we get to condition 1, the first character of pattern no longer appear
             return (isMatchRecur(text, pattern.substring(2)) || 
             (firstMatch && isMatchRecur(text.substring(1), pattern)));
         // if there is no '*', 
