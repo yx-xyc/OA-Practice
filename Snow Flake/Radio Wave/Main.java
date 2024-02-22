@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import java.util.*;
 
 public class Main {
@@ -18,7 +20,6 @@ public class Main {
         for (int i = 1; i <= nodes; i++) {
             graph[i] = new ArrayList<>();
         }
-
         // Build the graph
         for (int i = 0; i < edges_from.length; i++) {
             int u = edges_from[i];
@@ -26,29 +27,38 @@ public class Main {
             graph[u].add(v);
             graph[v].add(u);
         }
-
         // Copy frequencies
-        System.arraycopy(freqs, 0, frequency, 1, nodes);
-
+        System.arraycopy(
+            freqs,     // from array 
+            0,  // start index
+            frequency, // to array
+            1, // start index
+            nodes      // number of elem to copy
+        );
         // Run DFS from each node
+        // For each DFS, we found the maxDistance start from current node
+        // then mark all nodes as unvisited and do the same for the next node
         for (int i = 1; i <= nodes; i++) {
             Arrays.fill(visited, false);
             dfs(i, 0);
         }
-
         return maxDistance;
     }
-
+    // the dfs here is actually backtracking, since we don't want any path to be omitted
     private static void dfs(int node, int distance) {
+        // mark current node as visited
         visited[node] = true;
+        // update the maxDistance
         maxDistance = Math.max(maxDistance, distance);
-
+        // iterate over all the neighbor nodes
         for (int nextNode : graph[node]) {
+            // if we found a node has not been visited yet and it is reachable
+            // don't visit the same node multiple times to avoid infinite loop
             if (!visited[nextNode] && Math.abs(frequency[node] - frequency[nextNode]) == 1) {
                 dfs(nextNode, distance + 1);
             }
         }
-
+        // backtrack to assure all the possible paths are explored
         visited[node] = false;
     }
 }

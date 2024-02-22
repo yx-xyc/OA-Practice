@@ -7,7 +7,6 @@ public class Main {
         }
 
         long[] dp = new long[n + 1];
-        dp[0] = 1; // base case, 1 way to paint 0 houses
         dp[1] = 3;
         dp[2] = 6; // base case, 3 colors for the first house and 2 choices for the second house
 
